@@ -1,0 +1,8 @@
+api:
+  leakcheck:
+    base_url: "https://leakcheck.io/api/public"
+    timeout: 10
+  intelx:
+    base_url: "https://free.intelx.io"
+    timeout: 10
+  rate_limit_delay: 1.6
