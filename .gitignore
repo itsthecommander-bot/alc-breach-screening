@@ -1,3 +1,6 @@
-.env
+.pytest_cache/
 __pycache__/
-*.pyc
+venv/
+.coverage
+*.log
+output_result.csv

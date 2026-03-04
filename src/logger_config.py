@@ -5,7 +5,7 @@ def setup_logging():
         level=logging.DEBUG,
         format="%(asctime)s | %(levelname)s | %(message)s",
         handlers=[
-            logging.FileHandler("breach_service.log"),
+            logging.FileHandler("screening_service.log"),
             logging.StreamHandler()
         ]
     )
