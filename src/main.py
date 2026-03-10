@@ -1,3 +1,9 @@
+"""
+Reads email addresses from a CSV file, invokes the
+ScreeningService to query the APIs, and writes
+the results to an output CSV file. 
+"""
+
 import csv
 import logging
 import re
@@ -15,12 +21,19 @@ EMAIL_REGEX = re.compile(
 )
 
 def is_valid_email(email: str) -> bool:
+    """
+    Return True if the provided string is a valid email address.
+    """
     if not email:
         return False
     return bool(EMAIL_REGEX.match(email.strip()))
 
 
 def process_emails(primary_provider=None):
+    """
+    Read emails from the input CSV, check them against breach APIs,
+    and write the results to the output CSV file.
+    """
     logging.info("Starting email breach processing job")
 
     service = ScreeningService(primary_provider=primary_provider)

@@ -1,3 +1,7 @@
+"""
+Used to query the LeakCheck API for email breach information.
+"""
+
 import os
 import requests
 from dotenv import load_dotenv

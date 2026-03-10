@@ -36,3 +36,15 @@ class TestLeakCheckClient(unittest.TestCase):
 
         self.assertFalse(result["breached"])
         self.assertEqual(result["breach_count"], 0)
+
+    def test_leakcheck_handles_rate_limit(self):
+
+        client = LeakCheckClient("test_key", 10)
+
+        with patch("requests.get") as mock_get:
+            mock_response = MagicMock()
+            mock_response.status_code = 429
+            mock_get.return_value = mock_response
+
+            with self.assertRaises(Exception):
+                client.check_email("test@example.com")

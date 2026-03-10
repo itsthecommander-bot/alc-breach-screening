@@ -1,3 +1,4 @@
+import requests
 import unittest
 from unittest.mock import patch, MagicMock
 from src.providers.intelx_client import IntelXClient
@@ -51,3 +52,13 @@ class TestIntelXClient(unittest.TestCase):
         self.assertEqual(result["breach_count"], 2)
         self.assertIn("example.com", result["sources"])
         self.assertIn("test.com", result["sources"])
+
+    def test_intelx_timeout_handling(self):
+
+        client = IntelXClient("test_key", 10)
+
+        with patch("requests.post", side_effect=requests.exceptions.Timeout), \
+            patch("requests.get", side_effect=requests.exceptions.Timeout):
+
+            with self.assertRaises(requests.exceptions.Timeout):
+                client.check_email("test@example.com")

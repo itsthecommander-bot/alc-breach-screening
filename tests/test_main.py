@@ -99,3 +99,16 @@ class TestMain(unittest.TestCase):
         self.assertIn("True", output_content)
         self.assertIn("2", output_content)
         self.assertIn("example.com;test.com", output_content)
+
+    @patch("src.main.csv.DictReader")
+    @patch("src.main.open")
+    def test_missing_email_column(self, mock_open, mock_dictreader):
+
+        mock_reader = MagicMock()
+        mock_reader.fieldnames = ["name"]  # Missing email column
+        mock_reader.__iter__.return_value = []
+
+        mock_dictreader.return_value = mock_reader
+
+        with self.assertRaises(ValueError):
+            process_emails()

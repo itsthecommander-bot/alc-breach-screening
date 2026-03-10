@@ -1,3 +1,7 @@
+"""
+Used to query the IntelX API for email breach information.
+"""
+
 import os
 import time
 import requests

@@ -6,8 +6,15 @@ from src.providers.leakcheck_client import LeakCheckClient
 from src.providers.intelx_client import IntelXClient
 
 class ScreeningService:
+    """
+    Handles checking email addresses against the available breach providers
+    and manages switching to a backup provider if one fails.
+    """
 
     def __init__(self, primary_provider=None):
+        """
+        Initialise the service and load configuration for the API providers.
+        """
         self.config = self._load_config()
 
         self.providers = {
@@ -39,7 +46,7 @@ class ScreeningService:
 
     def _retry_with_backoff(self, func, provider_name, email):
         """
-        Retry wrapper with exponential backoff.
+        Retry a provider request multiple times if it fails.
         """
         for attempt in range(1, self.max_retries + 1):
             try:
@@ -63,10 +70,17 @@ class ScreeningService:
                 time.sleep(sleep_time)
 
     def _load_config(self):
+        """
+        Load API settings from the config.yaml file.
+        """
         with open("config.yaml", "r") as file:
             return yaml.safe_load(file)
 
     def check_email(self, email: str) -> dict:
+        """
+        Check an email address using the configured breach providers.
+        If the primary provider fails, the backup provider will be used.
+        """
         primary = self.primary_provider
         backup = next(p for p in self.providers if p != primary)
 

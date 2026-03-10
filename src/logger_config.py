@@ -1,3 +1,8 @@
+"""
+Configures logging for the breach screening application,
+including log format and log levels.
+"""
+
 import logging
 
 def setup_logging():
