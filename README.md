@@ -145,7 +145,7 @@ API credentials are stored securely using environment variables.
 
 Create a `.env` file:
 
-Example `.env` file:
+Example `.env` file confiiguration:
 
 ```
 LEAKCHECK_API_KEY=your_leakcheck_api_key
@@ -196,7 +196,7 @@ The program will then:
 - Output the results to `output_result.csv`  
 - Display an analyst summary
 
-### Example Output
+Example output from the analyst summary:
 
 ```
 --- Analyst Summary ---
@@ -321,4 +321,4 @@ The tool provides a scalable foundation for automated breach intelligence screen
 
 # License
 
-This project is provided for educational purposes as part of the Cloud Development Technologies coursework.
+This project is provided for educational purposes as part of the Advanced Cloud Development Technologies coursework.
