@@ -2,6 +2,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Docker](https://img.shields.io/badge/Docker-supported-blue)
 ![Tests](https://img.shields.io/badge/Tests-Pytest-green)
+![CI](https://github.com/itsthecommander-bot/alc-breach-screening/actions/workflows/ci.yml/badge.svg)
 
 ## Overview
 
@@ -15,15 +16,16 @@ The application is designed with **DevOps best practices**, including modular ar
 
 # Features
 
--CSV email input processing  
--Integration with breach intelligence APIs  
--Multi-provider support (LeakCheck and IntelX)  
--Retry logic with exponential backoff  
--Provider health monitoring and failover  
--Structured logging for observability  
--Automated unit testing with coverage reporting  
--Docker containerisation for reproducible environments  
--Analyst summary reporting  
+- CSV email input processing  
+- Integration with breach intelligence APIs  
+- Multi-provider support (LeakCheck and IntelX)  
+- Retry logic with exponential backoff  
+- Provider health monitoring and failover  
+- Structured logging for observability  
+- Automated unit testing with coverage reporting  
+- Docker containerisation for reproducible environments  
+- Continuous Integration (CI) pipeline using GitHub Actions  
+- Analyst summary reporting  
 
 ---
 
@@ -32,6 +34,9 @@ The application is designed with **DevOps best practices**, including modular ar
 ```
 ALC_Breach_Screening
 │
+├── .github
+│   └── workflows
+│       └── ci.yml
 ├── src
 │   ├── main.py
 │   ├── screening_service.py
@@ -99,10 +104,10 @@ cd ALC_Breach_Screening
 
 # Requirements
 
--Python 3.10 or newer  
--Docker (optional for containerised execution)  
--LeakCheck API key  
--IntelX API key
+- Python 3.10 or newer  
+- Docker (optional for containerised execution)  
+- LeakCheck API key  
+- IntelX API key
 
 
 ### 2. Create a virtual environment
@@ -185,11 +190,11 @@ Select primary provider:
 
 The program will then:
 
--Read email addresses from the input file `email_list.csv`  
--Query the selected API  
--Process the responses  
--Output the results to `output_result.csv`  
--Display an analyst summary
+- Read email addresses from the input file `email_list.csv`  
+- Query the selected API  
+- Process the responses  
+- Output the results to `output_result.csv`  
+- Display an analyst summary
 
 ### Example Output
 
@@ -209,9 +214,11 @@ housesholidays.com: 1
 
 # Testing
 
-Unit tests were implemented using pytest with coverage reporting.
+Unit tests were implemented using pytest with coverage reporting. 
+Tests are also automatically executed through a GitHub Actions Continuous 
+Integration (CI) pipeline whenever code is pushed to the repository.
 
-Run tests with:
+Run tests locally with:
 
 ```
 pytest --cov=src --cov-report=term-missing
@@ -219,17 +226,16 @@ pytest --cov=src --cov-report=term-missing
 
 ### Example Output
 
-```
-9 passed in 9.27s
-TOTAL coverage: 84%
-```
+12 passed in 9.57s  
+TOTAL coverage: 86%
 
-Testing includes:
+Testing includes validation of:
 
--API response parsing
--CSV input/output handling
--retry logic and failure scenarios
--provider failover behaviour
+- API response parsing
+- CSV input and output handling
+- retry logic and failure scenarios
+- provider failover behaviour
+- API rate limiting and timeout handling
 
 
 # Docker Deployment
@@ -257,10 +263,10 @@ The application implements structured logging using Python's logging module.
 
 Logs include:
 
--INFO – processing status
--DEBUG – detailed execution tracing
--WARNING – retry attempts
--ERROR – API failures
+- INFO – processing status
+- DEBUG – detailed execution tracing
+- WARNING – retry attempts
+- ERROR – API failures
 
 Logs are written to:
 
@@ -275,41 +281,41 @@ This tool is intended for defensive security analysis only.
 
 Key ethical considerations:
 
--Only authorised datasets should be used
--No real customer data should be processed without consent
--API usage must comply with provider terms of service
--Data handling must comply with GDPR principles, including data minimisation and purpose limitation
+- Only authorised datasets should be used
+- No real customer data should be processed without consent
+- API usage must comply with provider terms of service
+- Data handling must comply with GDPR principles, including data minimisation and purpose limitation
 
 All testing in this project uses synthetic or publicly available breach data.
 
 
 # Limitations
 
--Free API tiers restrict the number of daily queries
--Breach intelligence coverage depends on provider datasets
--Some breaches may not be publicly accessible
--Results should be treated as indicators of exposure, not definitive proof of compromise
+- Free API tiers restrict the number of daily queries
+- Breach intelligence coverage depends on provider datasets
+- Some breaches may not be publicly accessible
+- Results should be treated as indicators of exposure, not definitive proof of compromise
 
 
 # Future Improvements
 
 Potential enhancements include:
 
--asynchronous API requests for improved performance
--additional breach intelligence providers
--automated CI pipelines for testing
--visual dashboards for breach statistics
+- API request batching to improve processing speed
+- Additional breach intelligence providers
+- Dashboard visualisation for breach analytics
+- Scheduled automated breach monitoring
 
 
 # Conclusion
 
 This project demonstrates a production-style Python application implementing API-driven automation using modern DevOps practices including:
 
--modular architecture
--automated testing
--configuration management
--logging and observability
--containerisation with Docker
+- modular architecture
+- automated testing
+- configuration management
+- logging and observability
+- containerisation with Docker
 
 The tool provides a scalable foundation for automated breach intelligence screening within an organisational security workflow.
 
