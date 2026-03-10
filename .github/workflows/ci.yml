@@ -9,6 +9,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      INTELX_API_KEY: test_key
+      LEAKCHECK_API_KEY: test_key
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
